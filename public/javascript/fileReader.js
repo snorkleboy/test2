@@ -1,30 +1,30 @@
+
 document.addEventListener('DOMContentLoaded',function(){
     const fileUpload = document.getElementById('fileUpload');
     fileUpload.addEventListener("change", handleFiles);
 })
 
 function handleFiles(e){
-    
     const file = e.target.files[0];
-    console.log('filesize',file.size);
     const reader = new FileReader();
     reader.onload = function (e){
-        const timerStart = Date.now();
+
         const filesize = document.getElementById('filesize');
         const nLabel = document.getElementById('nLabel');
         const kLabel = document.getElementById('kLabel');
-        const contents = document.getElementById('contents');
         const time = document.getElementById('time');
-
-        priceArray = e.target.result.split(/[\n,\s,\r]/);
-
+        const data = e.target.result.split(/[\n]/);
+        const resultList = document.getElementById('result-UL')
         filesize.innerText = file.size;
-        nLabel.innerText = priceArray[0];
-        kLabel.innerText = priceArray[1];
-        contents.innerText = priceArray.slice(2,priceArray.length);
+        nk = data[0].split(' ');
+        nLabel.innerText = nk[0];
+        kLabel.innerText = nk[1];
 
-        const timerEnd = Date.now();
-        console.log(timerEnd,timerStart,timerEnd-timerStart)
+        priceArray = data[1].split(' ');
+        let timerStart = Date.now();
+        result = SubSeqAnalizer(priceArray, nk[1]);
+        let timerEnd = Date.now();
+        resultList.innerText = result;
         time.innerText = timerEnd - timerStart
         
     };

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo $1' '$2>$3
-echo 
+
 for ((n=0;n<$1;n++));do
     echo -n ' '$(($RANDOM*10))>>$3;
 done
